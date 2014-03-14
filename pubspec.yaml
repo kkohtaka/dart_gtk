@@ -1,0 +1,6 @@
+name: dart_gtk
+version: 0.0.0
+author: Kazumasa Kohtaka <kkohtaka@gmail.com>
+dependencies:
+dev_dependencies:
+  hop: any

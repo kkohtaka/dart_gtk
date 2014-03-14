@@ -1,0 +1,21 @@
+#!/bin/bash
+
+function follow_links() {
+  file="$1"
+  while [ -h "$file" ]; do
+    # On Mac OS, readlink -f doesn't work.
+    file="$(readlink "$file")"
+  done
+  echo "$file"
+}
+
+# Unlike $0, $BASH_SOURCE points to the absolute path of this file.
+PROG_NAME="$(follow_links "$BASH_SOURCE")"
+
+# Handle the case where bin has been symlinked to.
+BIN_DIR="$(cd "${PROG_NAME%/*}" ; pwd -P)"
+
+PACKAGES_DIR="$BIN_DIR/packages/"
+
+dart --package-root="$PACKAGES_DIR" "$BIN_DIR"/demo.dart
+
